@@ -1,8 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addSurveyData } from "../redux/actions";
+
+
 
 export default function Addsurvey() {
   const [showForm, setShowForm] = useState(false);
   const [questionList, setQuestionList] = useState([]);
+
+  const dispatch=useDispatch();
+
 
   function handleAddQuestion() {
     setQuestionList([...questionList, ""]);
@@ -16,8 +23,8 @@ export default function Addsurvey() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // Do something with the questionList
-    console.log(questionList);
+   
+  dispatch(addSurveyData(questionList))
     setShowForm(false);
   }
 

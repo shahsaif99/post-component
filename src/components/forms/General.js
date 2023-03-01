@@ -3,25 +3,43 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle, FaCamera, FaVideo } from "react-icons/fa";
 import {RiArticleLine,RiSurveyLine} from "react-icons/ri"
+import { useDispatch } from "react-redux";
+import { addGeneralPostData } from "../redux/actions";
 
 
 
 export default function General() {
   
   const [postContent, setPostContent] = useState({post:"", pimg:"",pvideo:""});
+
+  const dispatch=useDispatch();
+
  
-// let for storing name and value
-let name, value,file,type;
-// handleInputs for storing data into productData object
-const handleInputs = (e) =>{
-  name = e.target.name;
-  value=e.target.value;
-  file=e.target.files[0];
-  type=e.target.type
-setPostContent({...postContent,[name]:type === "file" ? URL.createObjectURL(file) : value}); 
+	// let for storing name and value
+	let name, value,file,type;
+	// handleInputs for storing data into productData object
 
-}
 
+
+	const handleInputs = (e) =>{
+		
+		name = e.target.name;
+		value=e.target.value;
+		
+	setPostContent({...postContent,[name] : value}); 
+
+	}
+	const uploadFiles= (e) => {
+		file= e.target.files[0];
+		name=e.target.name;
+
+		setPostContent({...postContent,[name]:URL.createObjectURL(file)})
+	}
+
+  const onFormSubmit=(e)=>{
+		e.preventDefault()
+		dispatch(addGeneralPostData(postContent))
+	   }
 
   return (
     <form className="flex flex-col gap-2 bg-white rounded-lg shadow-md p-4">
@@ -43,7 +61,7 @@ setPostContent({...postContent,[name]:type === "file" ? URL.createObjectURL(file
             accept="image/*"
             name="pimg"
             className="absolute top-0 left-0 w-full h-full opacity-0"
-            onChange={handleInputs}
+            onChange={uploadFiles}
           />
           <FaCamera
             className="text-gray-500 text-2xl cursor-pointer"
@@ -56,7 +74,7 @@ setPostContent({...postContent,[name]:type === "file" ? URL.createObjectURL(file
             accept="video/*"
             name="pvideo"
             className="absolute top-0 left-0 w-full h-full opacity-0"
-            onChange={handleInputs}
+            onChange={uploadFiles}
           />
           <FaVideo
             className="text-gray-500 text-2xl cursor-pointer"
@@ -81,6 +99,14 @@ setPostContent({...postContent,[name]:type === "file" ? URL.createObjectURL(file
      <RiSurveyLine className="text-gray-500 text-2xl cursor-pointer"/>
       </Link>
       </div>
+
+      <div className="relative">
+        <Link to="/posts">
+          <RiArticleLine className="text-gray-500 text-2xl cursor-pointer text-black"/>
+        </Link>
+
+
+      </div>
       </div>
      
         <img
@@ -100,7 +126,8 @@ setPostContent({...postContent,[name]:type === "file" ? URL.createObjectURL(file
       } 
    
       <div className="flex justify-end">
-        <button
+        <button 
+          onClick={onFormSubmit}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
         
         >

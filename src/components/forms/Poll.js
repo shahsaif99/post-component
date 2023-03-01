@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addPollData } from '../redux/actions';
+
+
+
 
 const Poll = () => {
+
   const [pollData, setPollData] = useState({
     title: '',
     options: ['']
   });
+
+  const dispatch=useDispatch();
+
 
   const handleTitleChange = (e) => {
     setPollData({ ...pollData, title: e.target.value });
@@ -29,8 +38,7 @@ const Poll = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // do something with pollData, such as sending it to a server
-    console.log(pollData);
+    dispatch(addPollData(pollData))
   };
 
   return (

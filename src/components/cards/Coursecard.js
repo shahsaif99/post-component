@@ -1,22 +1,28 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 
 export default function Coursecard(){
+
+  const data=useSelector((state)=>state.courseReducers.data)
+
     return(
       <div className="antialiased bg-gray-200 text-gray-900 font-sans p-6">
   <div className="container mx-auto">
     <div className="flex flex-wrap -mx-4">
-      <div className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
+    { data?.map((elem) => (
+      <div key={elem.id} className="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
         <div  className="c-card block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div className="relative pb-48 overflow-hidden">
-          <img className="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt=""/>
+          <img className="absolute inset-0 h-full w-full object-cover" src={elem.data.cimg} alt=""/>
         </div>
         <div className="p-4">
           
-          <h2 className="mt-2 mb-2  font-bold">Product name</h2>
-          <p> Teacher name</p>
-          <p className="text-sm">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec ullamcorper nulla non metus auctor fringilla.</p>
+          <h2 className="mt-2 mb-2  font-bold">{elem.data.ctitle}</h2>
+        <p> usename</p>
+          <p className="text-sm">{elem.data.cdiscription}</p>
           <div className="mt-3 flex items-center">
-            <span className="text-sm font-semibold">PKR</span>&nbsp;<span className="font-bold text-xl">45,00</span>&nbsp;<span className="text-sm font-semibold">€</span>
+              <span className="text-sm font-semibold">PKR</span>&nbsp;<span className="font-bold text-xl">{elem.data.price}</span>&nbsp;<span className="text-sm font-semibold">€</span>
           </div>
 
 <div className="mt-2 mb-2 flex items-center">
@@ -34,7 +40,7 @@ export default function Coursecard(){
        
       </div>
       </div>
-                     
+           ))  }        
     </div>
   </div>
 </div>

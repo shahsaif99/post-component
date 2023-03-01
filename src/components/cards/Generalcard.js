@@ -1,8 +1,16 @@
 import React from "react"
+import { useSelector } from "react-redux"
+
+
+
 
 export default function Generalcard(){
+  const data=useSelector((state)=>state.generalReducers.data)
+
     return(
-        <div className="mx-auto max-w-xs md:max-w-sm">
+      <div>
+      { data?.map((elem) => (
+        <div key={elem.id} className="mx-auto max-w-xs md:max-w-sm">
         <div className="bg-white rounded-lg shadow-lg p-4">
           <div className="flex justify-between items-center mb-4">
             <div className="flex items-center">
@@ -13,9 +21,9 @@ export default function Generalcard(){
               </div>
             </div>
           </div>
-          <p className="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, magna eu sollicitudin feugiat, lacus tellus feugiat tellus, a interdum lorem eros eu purus.</p>
-          <img src="https://media.istockphoto.com/id/184944186/photo/quaid-e-azam.webp?s=1024x1024&w=is&k=20&c=z6bPuEH5POYgNeJ7CtweLnGjrjq6kj81NxypwnDXo2c="/>
-          <div className="flex justify-between items-center">
+          <p className="text-gray-700 mb-4">{elem.data.post}</p>
+          <img src={elem.data.pimg}/>
+          <div className="flex justify-between items-center ">
             <button className="flex items-center text-gray-500 hover:text-blue-500">
               <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
               Like
@@ -32,6 +40,7 @@ export default function Generalcard(){
         </div>
       </div>
       
-      
+      )) }
+      </div>
     )
 }
