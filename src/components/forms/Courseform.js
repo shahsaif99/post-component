@@ -82,6 +82,7 @@ const uploadImage = (e) => {
   name=e.target.name;
 
   setCourseData({...courseData,[name]:URL.createObjectURL(file)})
+  console.log(e.target.files.length)
  
   if(e.target.files.length>1){
     setImage(true)
@@ -100,6 +101,14 @@ const onFormSubmit=(e)=>{
 
     e.preventDefault()
     dispatch(addCourseData(courseData))
+    setCourseData({ctitle:"",price:"",cdiscription:"",cimg:"",cvid:""})
+    setTitleError(true)
+    setPriceError(true)
+    setDiscError(true)
+    setImage(true)
+
+
+
   }
  
    }

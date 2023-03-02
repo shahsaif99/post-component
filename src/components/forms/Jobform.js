@@ -188,6 +188,37 @@ export default function Jobform() {
   else{
     e.preventDefault()
     dispatch(addJobData(jobData))
+    setJobData({
+      jname: "",
+      cname: "",
+      city: "",
+      salary: "",
+      experience: "",
+      positions: "",
+      fulltime: false,
+      parttime: false,
+      internship: false,
+      contract: false,
+      jnature: "",
+      uhiring: "",
+      aboutcompany: "",
+      therole: "",
+      requirements: "",
+    });  
+    setTitleError(true)
+    setCnameError(true)
+    setCityError(true)
+    setJNatureError(true)
+    setSalaryError(true)
+    setPositionsError(true)
+    setAboutCompanyError(true)
+    setTheRoleError(true)
+    setRequirementsError(true)
+
+
+    
+
+
   }
 
 

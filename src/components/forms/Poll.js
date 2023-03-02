@@ -12,11 +12,25 @@ const Poll = () => {
     options: ['']
   });
 
+
+const [titleError, settitleError] = useState(true);
+
   const dispatch=useDispatch();
 
 
   const handleTitleChange = (e) => {
     setPollData({ ...pollData, title: e.target.value });
+
+    if (e.target.id === 'title') {
+
+      if (e.target.value.length <= 3  ) {
+        settitleError(true)
+      }
+      else{
+        settitleError(false)
+      }
+      
+    }
   };
 
   const handleOptionChange = (index, e) => {
@@ -37,8 +51,22 @@ const Poll = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addPollData(pollData))
+
+     
+    if( pollData.options.length <2 || titleError ){
+      e.preventDefault();
+      alert("Please add atleast two option")
+    }
+    else{
+  
+     
+      e.preventDefault();
+      dispatch(addPollData(pollData))
+  
+    
+    }
+
+
   };
 
   return (

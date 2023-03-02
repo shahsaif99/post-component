@@ -1,10 +1,10 @@
-const initialJobData ={
+const initialGeneralData ={
      
     data:[]
     }
 
 
-const generalReducers = (state = initialJobData, action) => {
+const generalReducers = (state = initialGeneralData, action) => {
 
     
     

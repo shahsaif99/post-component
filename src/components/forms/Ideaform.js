@@ -121,6 +121,13 @@ const onFormSubmit=(e)=>{
 
     e.preventDefault()
   dispatch(addIdeaData(ideaData))
+  setIdeaData({idea:"",budget:"",your_discription:"",skills:"",about_idea:"",idea_img:""})
+  setTitleError(true)
+  setSalaryError(true)
+  setAboutCompanyError(true)
+  setTheIdeaError(true)
+  setSkillsError(true)
+  setImage(true)
   }
 
   

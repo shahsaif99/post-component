@@ -62,6 +62,10 @@ const onFormSubmit=(e)=>{
 
     e.preventDefault()
   dispatch(addHelpData(helpData))
+  setHelpData({sub:"",hdiscription:"",himg:""});
+  setSubjectError(true);
+  setdiscriptionError(true);
+  
   }
 
   

@@ -75,6 +75,7 @@ export default function Jobcard() {
         <h2 className="text-center font-serif  uppercase text-4xl xl:text-5xl">
           Recent Jobs
         </h2>
+        
         {/* both container side by side starts */}
 
         {/* container for job card list */}

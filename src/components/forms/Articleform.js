@@ -1,4 +1,4 @@
-import React from "react"
+import {useState} from "react"
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useDispatch } from "react-redux";
@@ -6,7 +6,11 @@ import { addArticleData } from "../redux/actions";
 import { Link } from "react-router-dom";
 
 export default function Articleform(){
-  const [articleData, setArticleData] = React.useState({title:"", content:"", image:""});
+  const [articleData, setArticleData] = useState({title:"", content:"", image:""});
+
+  const [titleError, settitleError] = useState(true);
+const [contentError, setContentError] = useState(true);
+const [imageError, setImage] = useState(true);
 
 
   const dispatch=useDispatch();
@@ -19,6 +23,13 @@ export default function Articleform(){
       ...prevState,
       [name]: value
     }));
+
+    if (e.target.value.length <= 3  ) {
+      settitleError(true)
+    }
+    else{
+      settitleError(false)
+    }
   };
 
   const handleQuillChange = (content, delta, source, editor) => {
@@ -26,6 +37,17 @@ export default function Articleform(){
       ...prevState,
       content: editor.getHTML()
     }));
+   
+    if (content.length <= 1000) {
+      setContentError(true)
+    }
+    else if (content.length>120000) {
+      setContentError(true)
+    } 
+    else{
+      setContentError(false)
+    }
+
   };
 
   const uploadImage = (e) => {
@@ -34,12 +56,28 @@ export default function Articleform(){
     		name=e.target.name;
     
     		setArticleData({...articleData,[name]:URL.createObjectURL(file)})
+        if(e.target.files.length>1){
+          setImage(true)
+         }
+         else{
+          setImage(false)
+         }
+      
     	}
 
 
       const onFormSubmit=(e)=>{
-        e.preventDefault()
-        dispatch(addArticleData(articleData))
+        if(titleError  || contentError || imageError  ){
+          e.preventDefault()
+          alert("Please Fill all the form correctly ")
+        }
+        else{
+          e.preventDefault()
+          dispatch(addArticleData(articleData))
+        }
+       
+
+       
          }
      
   return (
@@ -57,6 +95,8 @@ export default function Articleform(){
           placeholder="Enter title here"
           onChange={handleInputChange}
         />
+
+        { titleError && <span className="text-xs text-red-600  ">Please enter valid course title</span>}
       </div>
       <div className="mb-8">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="content">
@@ -67,6 +107,7 @@ export default function Articleform(){
           name="content"
           onChange={handleQuillChange}
         />
+          { contentError && <span className="text-xs text-red-600  ">Title Body should atleast between 1000 to 120000 characters</span>}
       </div>
       <div className="md:col-span-5">
         <label className="block w-56">

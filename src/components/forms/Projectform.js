@@ -3,6 +3,7 @@ import { useState} from "react";
 import {Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProjectData } from "../redux/actions";
+import { FaIcon } from "react-icons/fa";
 
 
 export default function Projectform(){
@@ -138,6 +139,19 @@ export default function Projectform(){
 
       e.preventDefault()
       dispatch(addProjectData(projectData))
+      setProjectData({prname:"",skills:"",ptype:"",currency:"",minsalary:"",maxsalary:"",pdiscription:"",days:"0"})
+      setTitleError(true)
+      setDiscError(true)
+      setSkillsError(true)
+      setTypeError(true)
+      setCurrencyError(true)
+      setMinSalaryError(true)
+      setMaxSalaryError(true)
+
+
+
+
+
     }
 	   }
 
@@ -157,6 +171,7 @@ export default function Projectform(){
                   <div className="mt-24">
 
 			<Link  to="/projects">View Projects</Link>
+     
 			</div>
                 </div>
       

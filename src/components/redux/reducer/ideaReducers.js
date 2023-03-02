@@ -1,10 +1,10 @@
-const initialJobData ={
+const initialIdeaData ={
      
     data:[]
     }
 
 
-const ideaReducers = (state = initialJobData, action) => {
+const ideaReducers = (state = initialIdeaData, action) => {
 
     
     

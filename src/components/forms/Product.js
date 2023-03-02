@@ -15,9 +15,9 @@ export default function Product(props){
 	// handleInputs for storing data into productData object
 
 const [titleError, settitleError] = useState(true);
-const [priceError, setpriceError] = useState(true);
 const [descError, setdescError] = useState(true);
 const [imageError, setimage] = useState(true);
+const [priceError, setpriceError] = useState(true);
 
 
 
@@ -98,6 +98,13 @@ const [imageError, setimage] = useState(true);
 
       e.preventDefault()
       dispatch(addProductData(productData))
+      setProductData({pname:"",price:"",discription:"",pimg:""})
+      settitleError(true)
+      setpriceError(true)
+      setdescError(true)
+      setimage(true)
+
+
     }
 	   }
 

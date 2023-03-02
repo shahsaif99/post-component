@@ -16,7 +16,7 @@ export default function Article(){
 
       
       { data?.map((elem) => (
-<div key={elem.id} className="w-fit h-fit  mb-4 ">
+<div id="parent" key={elem.id} className="w-fit h-fit mb-4 relative max-w-full overflow-x-auto">
 <h1 className=" lg:text-3xl font-semibold leading-tight pl-3 pt-3 ">
  {elem.data.title}
 </h1>
@@ -42,8 +42,8 @@ export default function Article(){
 
 
 
-<div className="text-center max-w-screen-sm">
-<div dangerouslySetInnerHTML={{ __html: elem.data.content }}>
+<div  className="text-center max-w-screen-sm">
+<div id="content" dangerouslySetInnerHTML={{ __html: elem.data.content }}>
 
 
 </div>
@@ -64,10 +64,3 @@ export default function Article(){
 
 
 
-{/* <div className=" flex items-center ">
-  <div className=" mr-2">listen to Article </div>
-  <div><audio controls className="mx-auto my-4">
-  <source src="audio-file.mp3" type="audio/mpeg" />
-  Your browser does not support the audio element.
-</audio></div>
-</div> */}

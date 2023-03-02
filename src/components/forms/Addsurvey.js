@@ -8,6 +8,9 @@ export default function Addsurvey() {
   const [showForm, setShowForm] = useState(false);
   const [questionList, setQuestionList] = useState([]);
 
+  
+ 
+
   const dispatch=useDispatch();
 
 
@@ -22,13 +25,22 @@ export default function Addsurvey() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-   
-  dispatch(addSurveyData(questionList))
-    setShowForm(false);
+    
+    if( questionList.length <1 ){
+      event.preventDefault();
+      alert("Please add atleast one question")
+    }
+    else{
+  
+      event.preventDefault();
+    dispatch(addSurveyData(questionList))
+      setShowForm(false);
+    
+    }
+
   }
 
-  console.log(questionList)
+  
   if (showForm) {
     return (
       <div className="flex flex-col items-center bg-gray-100 h-screen">
